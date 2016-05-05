@@ -30,7 +30,7 @@
                    (do (reset! up-progress (get-in (ex-data e) [:progress])) nil)
                    (throw e))))
         (do (prn "Retry") (recur (inc retries)))))))
-gi
+
 (defn upload-async
   [host port input name destination username rsa-path]
   (future
