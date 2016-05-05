@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module cursive.leiningen.project.LeiningenProjectsManager.displayName="upload-test:0.3.2" cursive.leiningen.project.LeiningenProjectsManager.isLeinModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dev-resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Leiningen: byte-streams:0.2.2" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-ssh:0.5.14" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-stacktrace:0.2.8" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-time:0.9.0" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-tuple:0.2.2" level="project" />
+    <orderEntry type="library" name="Leiningen: clojure-complete:0.2.3" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.core:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.jsch:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.pageant:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.sshagent:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.usocket-jna:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch.agentproxy.usocket-nc:0.0.9" level="project" />
+    <orderEntry type="library" name="Leiningen: com.jcraft/jsch:0.1.53" level="project" />
+    <orderEntry type="library" name="Leiningen: commons-codec:1.6" level="project" />
+    <orderEntry type="library" name="Leiningen: commons-fileupload:1.3.1" level="project" />
+    <orderEntry type="library" name="Leiningen: commons-io:2.4" level="project" />
+    <orderEntry type="library" name="Leiningen: crypto-equality:1.0.0" level="project" />
+    <orderEntry type="library" name="Leiningen: crypto-random:1.2.0" level="project" />
+    <orderEntry type="library" name="Leiningen: fresh:1.1.1" level="project" />
+    <orderEntry type="library" name="Leiningen: hiccup:1.0.5" level="project" />
+    <orderEntry type="library" name="Leiningen: io.aleph/dirigiste:0.1.3" level="project" />
+    <orderEntry type="library" name="Leiningen: joda-time:2.6" level="project" />
+    <orderEntry type="library" name="Leiningen: listora/again:0.1.0" level="project" />
+    <orderEntry type="library" name="Leiningen: manifold:0.1.4" level="project" />
+    <orderEntry type="library" name="Leiningen: mmargs:1.2.0" level="project" />
+    <orderEntry type="library" name="Leiningen: net.java.dev.jna/jna-platform:4.1.0" level="project" />
+    <orderEntry type="library" name="Leiningen: net.java.dev.jna/jna:4.1.0" level="project" />
+    <orderEntry type="library" name="Leiningen: ns-tracker:0.3.0" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.7.0" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/java.classpath:0.2.2" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.cli:0.2.4" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.logging:0.2.6" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.namespace:0.2.10" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.nrepl:0.2.10" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/tools.reader:0.9.1" level="project" />
+    <orderEntry type="library" name="Leiningen: primitive-math:0.1.5" level="project" />
+    <orderEntry type="library" name="Leiningen: riddley:0.1.12" level="project" />
+    <orderEntry type="library" name="Leiningen: ring/ring-codec:1.0.0" level="project" />
+    <orderEntry type="library" name="Leiningen: ring/ring-core:1.4.0" level="project" />
+    <orderEntry type="library" name="Leiningen: ring/ring-devel:1.4.0" level="project" />
+    <orderEntry type="library" name="Leiningen: speclj:3.3.0" level="project" />
+    <orderEntry type="library" name="Leiningen: trptcolin/versioneer:0.1.1" level="project" />
+  </component>
+</module>
