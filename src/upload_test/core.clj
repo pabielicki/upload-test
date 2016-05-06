@@ -33,11 +33,14 @@
 
 (defn upload-async
   [host port input name destination username rsa-path]
-  (future
-    (let [progress (atom 0)]
-      (check-progress
-        #(again/with-retries [100 100 100]
-                             (upload-to-sftp progress host port input name destination username rsa-path))))))
+  (let [async
+        (future
+          (let [progress (atom 0)]
+            (check-progress
+              #(again/with-retries
+                [100 100 100]
+                (upload-to-sftp progress host port input name destination username rsa-path)))))]
+    async))
 
 (defn rounded-single-chunk-size
   [file count]
@@ -101,5 +104,45 @@
   (upload-async "192.168.1.105" 22 "x.txt" "lallaa" "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test")
   (time (chunk-and-send-file "x.txt" 5 "192.168.1.105" 22 "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test"))
   (time (x "x.txt" 5 "192.168.1.105" 22 "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test"))
-  (-main "-c" 2 "-ip" "192.168.1.105" "-p" 22 "-f" "backup.tar.bz2" "-d" "Pulpit/takietam/tests" "-u" "kisiel" "-rsa" "/home/paveu/.ssh/id_rsa.test")
+  (-main "-c" 5 "-ip" "192.168.1.105" "-p" 22 "-f" "test1" "-d" "Pulpit/takietam/tests" "-u" "kisiel" "-rsa" "/home/paveu/.ssh/id_rsa.test")
+
+
+
+
+  (defn check-test2
+    [f]
+    (let [up-progress (atom 0)]
+      (loop [retries 0]
+        (if (try (f))
+          (prn "success")
+          (prn "Retry")))))
+
+  (defn check-test
+    [f]
+    (let [up-progress (atom 0)]
+      (loop [retries 0]
+        (when-not (try (f))
+          (prn "Retry")))))
+
+  (defn mock-func
+    [time]
+    (println (apply str "start" (str time)))
+    (Thread/sleep (* time 1000))
+    (println "done")
+    100)
+
+  (defn async-test
+    [time]
+    (let [x (future (check-test2 #(mock-func time)))] x)
+    )
+
+
+
+  (time
+    (->>
+      (range 10)
+      (map async-test)
+      (map deref)
+      (doall)))
+
   )

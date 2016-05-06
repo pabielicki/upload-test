@@ -1,4 +1,4 @@
-(defproject upload-test "0.4.3"
+(defproject upload-test "0.4.4"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
