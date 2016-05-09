@@ -4,6 +4,7 @@
    upload-test.sftp-upload)
   (:require
     [clojure.java.io :as io]
+    [progressbar.core :refer [progressbar]]
     [again.core :as again]
     [upload-test.retries :refer :all]
     [clojure.tools.cli :refer [cli]])
@@ -23,23 +24,28 @@
 (defn check-progress
   [f]
   (let [up-progress (atom 0)]
+
     (loop [retries 0]
       (when-not (try (f)
                (catch Exception e
+                 (prn (get-in (ex-data e) [:progress]))
                  (if (< 0 (- (get-in (ex-data e) [:progress]) @up-progress))
                    (do (reset! up-progress (get-in (ex-data e) [:progress])) nil)
                    (throw e))))
         (do (prn "Retry") (recur (inc retries)))))))
 
 (defn upload-async
-  [host port input name destination username rsa-path]
+  [host port file start size name destination username rsa-path]
   (let [async
         (future
           (let [progress (atom 0)]
             (check-progress
               #(again/with-retries
-                [100 100 100]
-                (upload-to-sftp progress host port input name destination username rsa-path)))))]
+                [5000 5000 5000]
+                (let [input (io/input-stream file)]
+                  (.skip input start)
+                  (let [bounded (BoundedInputStream. input size)]
+                   (upload-to-sftp progress host port bounded size name destination username rsa-path)))))))]
     async))
 
 (defn rounded-single-chunk-size
@@ -60,10 +66,7 @@
   (->>
     (just-chunk file count)
     (map
-      #(let [input (io/input-stream file)]
-        (.skip input (get-in % [:start]))
-        (let [bounded (BoundedInputStream. input (get-in % [:size]))]
-          (upload-async host port bounded (get-in % [:name]) destination username rsa-path))))
+      #(upload-async host port file (get-in % [:start]) (get-in % [:size]) (get-in % [:name]) destination username rsa-path))
     (map deref)
     (doall)))
 
@@ -76,9 +79,9 @@
       (let [progress (atom 0)]
         (check-progress
          #(again/with-retries
-           [100 100 100]
+           [5000 5000 5000]
            (upload-to-sftp progress
-             (:host opts) (Integer. (:port opts)) (:file opts)
+             (:host opts) (Integer. (:port opts)) (:file opts) (file-size (:file opts))
              (if (:name opts) (:name opts) (:file opts))
              (:destination opts) (:username opts) (:rsa-path opts))))))))
 
@@ -104,7 +107,9 @@
   (upload-async "192.168.1.105" 22 "x.txt" "lallaa" "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test")
   (time (chunk-and-send-file "x.txt" 5 "192.168.1.105" 22 "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test"))
   (time (x "x.txt" 5 "192.168.1.105" 22 "Pulpit/takietam/tests" "kisiel" "/home/paveu/.ssh/id_rsa.test"))
-  (-main "-c" 5 "-ip" "192.168.1.105" "-p" 22 "-f" "test1" "-d" "Pulpit/takietam/tests" "-u" "kisiel" "-rsa" "/home/paveu/.ssh/id_rsa.test")
+  (-main "-ip" "192.168.1.105" "-p" 22 "-f" "test8.tar.gz" "-d" "Pulpit/takietam" "-u" "kisiel" "-rsa" "/home/paveu/.ssh/id_rsa.test")
+  ;(-main "-c" 5 "-ip" "213.222.210.140" "-p" 22002 "-f" "test4.tar.gz" "-d" "Upload" "-u" "test" "-rsa" "/home/paveu/Pulpit/test")
+
 
 
 

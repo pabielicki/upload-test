@@ -1,4 +1,4 @@
-(defproject upload-test "0.4.4"
+(defproject upload-test "0.4.8"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -7,6 +7,7 @@
                  [clj-ssh "0.5.14"]
                  [byte-streams "0.2.2"]
                  [listora/again "0.1.0"]
+                 [progressbar "0.0.2"]
                  [antler/commons-io "2.2.0"]
                  [org.clojure/tools.cli "0.2.4"]]
   :profiles {:dev {:dependencies [[ring/ring-devel "1.4.0"]
